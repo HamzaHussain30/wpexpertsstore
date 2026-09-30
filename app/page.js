@@ -7,35 +7,21 @@ export default function Home() {
         {/* ============ HERO ============ */}
         <section className="hero">
           <div className="container hero__inner">
-            <h1>WooCommerce Plugins That Turn <span className="grad">Browsers Into Buyers</span></h1>
-            <p className="hero__sub">40+ premium WooCommerce extensions built by real experts — try any plugin risk-free.</p>
-
-            <form className="hero__search" role="search">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
-              <input type="search" placeholder="Search plugins, e.g. wholesale, currency, donation…" aria-label="Search plugins" />
-              <button className="btn btn--primary" type="submit"><BtnRoll>Search</BtnRoll></button>
-            </form>
-
-            <div className="hero__shot">
+            <div className="hero__copy">
+              <h1>WooCommerce Plugins That Turn <span className="grad">Browsers Into Buyers</span></h1>
+              <p className="hero__sub">40+ premium WooCommerce extensions built by real experts — try any plugin risk-free.</p>
+  
+              <form className="hero__search" role="search">
+                <input type="search" placeholder="Search plugins, e.g. wholesale, currency…" aria-label="Search plugins" />
+                <button type="submit" aria-label="Search">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
+                </button>
+              </form>
+            </div>
+            <div className="hero__stage">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/photos/wpexperts-store-hero-image.png" alt="WPExperts WooCommerce dashboard with AI assistant, sales analytics and top products" width="1672" height="941" loading="eager" fetchPriority="high" />
+              <img className="hero__visual" src="/images/photos/hero-foreground.png" alt="WooCommerce dashboard with sales, orders and top products" width="1031" height="571" loading="eager" fetchPriority="high" />
             </div>
-
-            <div className="hero__ctarow">
-              <a href="/products" className="btn btn--dark btn--lg"><BtnRoll>Browse All Plugins</BtnRoll></a>
-              <a href="#b2b" className="btn btn--outline btn--lg"><BtnRoll>See B2B Wholesale</BtnRoll></a>
-            </div>
-          </div>
-        </section>
-
-        {/* ============ TRUST / BRANDS ============ */}
-        <section className="brands" aria-label="Customers">
-          <div className="container">
-            <p className="brands__label">Trusted By <strong>1.5&nbsp;Million+</strong> Brands, Distributors &amp; Stores Worldwide</p>
-          </div>
-          <div className="brands__marquee">
-            <div className="brands__row" id="brandRowA"></div>
-            <div className="brands__row brands__row--rev" id="brandRowB"></div>
           </div>
         </section>
 
@@ -51,6 +37,16 @@ export default function Home() {
             <div className="section__foot">
               <a href="/products" className="btn btn--dark btn--lg"><BtnRoll>Explore More Plugins</BtnRoll> <span data-icon="arrow"></span></a>
             </div>
+          </div>
+        </section>
+
+        {/* ============ STATS BAND ============ */}
+        <section className="statsband">
+          <div className="container statsband__inner">
+            <div><b>500k<i>+</i></b><span>Trusted By Customers</span></div>
+            <div><b>40<i>+</i></b><span>Premium Plugins</span></div>
+            <div><b>750k<i>+</i></b><span>Total Downloads</span></div>
+            <div><b>14<i> Yrs</i></b><span>WooCommerce Expertise</span></div>
           </div>
         </section>
 
@@ -89,13 +85,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ============ STATS BAND ============ */}
-        <section className="statsband">
-          <div className="container statsband__inner">
-            <div><b>500k<i>+</i></b><span>Trusted By Customers</span></div>
-            <div><b>40<i>+</i></b><span>Premium Plugins</span></div>
-            <div><b>750k<i>+</i></b><span>Total Downloads</span></div>
-            <div><b>14<i> Yrs</i></b><span>WooCommerce Expertise</span></div>
+        {/* ============ TRUST / BRANDS ============ */}
+        <section className="brands" aria-label="Customers">
+          <div className="container">
+            <p className="brands__label">Trusted By <strong>1.5&nbsp;Million+</strong> Brands, Distributors &amp; Stores Worldwide</p>
+          </div>
+          <div className="brands__marquee">
+            <div className="brands__row" id="brandRowA"></div>
+            <div className="brands__row brands__row--rev" id="brandRowB"></div>
           </div>
         </section>
 
