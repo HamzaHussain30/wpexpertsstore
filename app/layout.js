@@ -7,6 +7,7 @@ import { Figtree } from 'next/font/google';
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
 import WhatsAppFab from './components/WhatsAppFab';
+import SmoothScroll from './components/SmoothScroll';
 
 const figtree = Figtree({
   subsets: ['latin'],
@@ -95,6 +96,7 @@ export default function RootLayout({ children }) {
         {children}
         <SiteFooter />
         <WhatsAppFab />
+        <SmoothScroll />
         <Script src="/js/main.js" strategy="afterInteractive" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJson) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(storeJson) }} />
