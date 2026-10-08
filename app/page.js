@@ -59,28 +59,24 @@ export default function Home() {
               <p>Not just a plugin — a full B2B operating system for WooCommerce, driven by AI.</p>
             </div>
 
-            <div className="b2b__showcase">
-              <div className="b2b__visual">
-                <div className="b2b__shot">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/photos/wpexperst-store-whole-image.png" alt="AI-powered B2B analytics dashboard with AI assistant for WooCommerce Wholesale" width="1254" height="1254" loading="lazy" />
-                </div>
+            <div className="b2b__stage">
+              <div className="b2b__scroll">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/photos/woocommerce-wholesale-dashboard.png" alt="AI-powered B2B analytics dashboard for WooCommerce Wholesale, with AI pricing, B2B pricing, bulk order table and company credit features" width="1774" height="887" loading="lazy" />
               </div>
+            </div>
 
-              <div className="b2b__side">
-                <div className="b2b__features">
-                  <article className="b2b__feat"><span className="fic" data-icon-duo="ai"></span><div><h3>AI-Powered</h3><p>Smart pricing suggestions, auto-generated quotes and predictive B2B workflows.</p></div></article>
-                  <article className="b2b__feat"><span className="fic" data-icon-duo="dashboard"></span><div><h3>B2B Analytics Dashboard</h3><p>Track wholesale revenue, buyers and orders in real time from one screen.</p></div></article>
-                  <article className="b2b__feat"><span className="fic" data-icon-duo="tag"></span><div><h3>B2B Pricing</h3><p>Role-based, tiered and dynamic wholesale pricing for every customer group.</p></div></article>
-                  <article className="b2b__feat"><span className="fic" data-icon-duo="table"></span><div><h3>Bulk Order Product Table</h3><p>Let buyers add dozens of SKUs to cart in seconds with a fast order table.</p></div></article>
-                  <article className="b2b__feat"><span className="fic" data-icon-duo="shield"></span><div><h3>Company Accounts &amp; Credit</h3><p>Company credit lines, buyer permissions and invoice payments for every wholesale account.</p></div></article>
-                </div>
+            <div className="b2b__features">
+              <article className="b2b__feat"><span className="fic" data-icon-duo="ai"></span><div><h3>AI-Powered</h3><p>Smart pricing suggestions, auto-generated quotes and predictive B2B workflows.</p></div></article>
+              <article className="b2b__feat"><span className="fic" data-icon-duo="dashboard"></span><div><h3>B2B Analytics Dashboard</h3><p>Track wholesale revenue, buyers and orders in real time from one screen.</p></div></article>
+              <article className="b2b__feat"><span className="fic" data-icon-duo="tag"></span><div><h3>B2B Pricing</h3><p>Role-based, tiered and dynamic wholesale pricing for every customer group.</p></div></article>
+              <article className="b2b__feat"><span className="fic" data-icon-duo="table"></span><div><h3>Bulk Order Product Table</h3><p>Let buyers add dozens of SKUs to cart in seconds with a fast order table.</p></div></article>
+              <article className="b2b__feat"><span className="fic" data-icon-duo="shield"></span><div><h3>Company Accounts &amp; Credit</h3><p>Company credit lines, buyer permissions and invoice payments for every wholesale account.</p></div></article>
+            </div>
 
-                <div className="b2b__cta">
-                  <a href="https://store.wpexperts.io/product/wholesale-for-woocommerce/" target="_blank" rel="noopener" className="btn btn--primary btn--lg"><BtnRoll>Explore B2B Wholesale</BtnRoll> <span data-icon="arrow"></span></a>
-                  <a href="https://store.wpexperts.io/" target="_blank" rel="noopener" className="btn btn--plain btn--lg"><span data-icon="play"></span> <BtnRoll>Watch Demo</BtnRoll></a>
-                </div>
-              </div>
+            <div className="b2b__cta">
+              <a href="https://store.wpexperts.io/product/wholesale-for-woocommerce/" target="_blank" rel="noopener" className="btn btn--primary btn--lg"><BtnRoll>Explore B2B Wholesale</BtnRoll> <span data-icon="arrow"></span></a>
+              <a href="https://store.wpexperts.io/" target="_blank" rel="noopener" className="btn btn--plain btn--lg"><span data-icon="play"></span> <BtnRoll>Watch Demo</BtnRoll></a>
             </div>
           </div>
         </section>
@@ -137,7 +133,7 @@ export default function Home() {
         </section>
 
         {/* ============ WHY WPEXPERTS (Razor-style split card) ============ */}
-        <section className="section" id="compare">
+        <section className="section section--why" id="compare">
           <div className="container">
             <div className="whyus">
               <div className="whyus__intro">
