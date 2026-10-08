@@ -9,7 +9,7 @@ export default function Home() {
           <div className="container hero__inner">
             <div className="hero__copy">
               <h1>WooCommerce Plugins That Turn <span className="grad">Browsers Into Buyers</span></h1>
-              <p className="hero__sub">40+ premium WooCommerce extensions built by real experts — try any plugin risk-free.</p>
+              <p className="hero__sub">40+ premium WooCommerce extensions that solve one problem properly: conversion, retention, B2B wholesale and design. Built by real WooCommerce experts. Try any plugin risk-free; upgrade only when it's making you money.</p>
   
               <form className="hero__search" role="search">
                 <input type="search" placeholder="Search plugins, e.g. wholesale, currency…" aria-label="Search plugins" />
@@ -100,9 +100,9 @@ export default function Home() {
         <section className="section section--framed" id="categories">
           <div className="container">
             <div className="section__head">
-              <span className="pill">Plugin Library</span>
-              <h2>Solutions Built For Every WooCommerce Need</h2>
-              <p>Explore extensions designed to help you sell more, manage customers, <br/> automate workflows, and scale your store.</p>
+              <span className="pill">The Full Library</span>
+              <h2>Find The Perfect Plugin <br/> For Your Niche</h2>
+              <p>Browse 40+ WooCommerce extensions organized by exactly <br/> what you're trying to achieve.</p>
             </div>
             <div className="ctabs" id="catTabs" role="tablist"></div>
             <div className="cat-bar">
