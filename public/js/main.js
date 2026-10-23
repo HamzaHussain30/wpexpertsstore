@@ -67,6 +67,14 @@
   $$('[data-icon]').forEach((el) => (el.innerHTML = icon(el.dataset.icon)));
   $$('[data-icon-duo]').forEach((el) => (el.innerHTML = iconDuo(el.dataset.iconDuo)));
 
+
+  const productLogos = [["wholesale","Wholesale-For-WooCommerce-5-5.png"],["donation","Donation-for-WooCommerce-2-12.png"],["currency","Currency-Switcher-For-WooCommerce-2-14.png"],["netsuite","NetSuite-Connector-for-WooCommerce.svg"],["bulk product editor","bulk-product-editor-logo.svg"],["qcommerce","Frame-1.svg"],["conditional fee","Conditional-Fees-for-WooCommerce-3-1.png"],["loyalty","Loyalty-for-Woo.svg"],["sequence order","Smart-Sequence-Order-Number-for-WooCommerce-MarketPlace-Icon-1.webp"],["wishlist","Smart-Wishlist-for-WooCommerce-MarketPlace-Icon-1.svg"],["b2b payments","B2B-Payments-for-WooCommerce-MarketPlace-Icon.svg"],["pdf packing","PDF-Packing-Slips-and-Invoice-Builder-MarketPlace-Icon.svg"],["smart discounts","Smart-Discount-Coupon-for-WoooCommerce-MarketPlace-Icon-1.svg"],["inventory","Smart-Inventory-Management.svg"],["custom product","Smart-Custom-Product-Addons-Fields-for-WooCommerce-MarketPlace-Icon.svg"],["pay your price","Pay-Your-Price-for-WooCommerce-MarketPlace-Icon.svg"],["store credits","Store-Credits-Gift-Cards.svg"],["dynamic","Dynamic-And-Role-Based-Pricing-for-WooCommerce-MarketPlace-Icon.svg"],["abandoned cart","Abandoned-Cart-for-WooCommerce.svg"],["delivery","Delivery-Options-for-WooCommerce-2-1.png"],["checkout fields","Custom-Checkout-Fields-Editor-MarketPlace-Icon.svg"],["instant checkout","Instant-Checkout-for-WooCommerce-2-1.png"],["product quantity","Product-Quantity-for-WooCommerce-MarketPlace-Icon.svg"],["variations","Bulk-Variation-and-Swatches-MarketPlace-Icon.svg"],["restaurant","Restaurant-for-WooCommerce-2-4.png"],["company credits","B2B-Payments-for-WooCommerce-1-2.png"],["invoice payment","B2B-Invoice-Payment-Method-4-1.png"],["user registration","User-Registration-for-WooCommerce-2-1.png"],["bulk order","Bulk-Order-Form-For-WooCommerce-3-10.png"],["sales agent","Sales-Agent-for-WooCommerce-2-5.png"],["request a quote","Quote-for-WooCommerce-2-2.png"],["product bundle","Smart-Product-Bundles-For-WooCommerce-2-1.png"],["tiered","Tiered-Pricing-for-WooCommerce-2-2.png"],["fundraising","Fundraising-for-WooCommerce-MarketPlace-Icon-1.webp"],["spin wheel","Spin-Wheel-For-WooCommerce-2-5.png"],["address","Address-Autocomplete-for-WooCommerce-4-5.png"],["keap","Keap-for-WooCommerce-3-5.png"],["store finder","Store-Finder-For-WooCommerce-4-1.png"],["notifications","Notifications-for-WooCommerce-2-1.png"],["license","License-Manager-for-WooCommerce-2-2.png"],["gamification","Gamification-for-WooCommerce-3-1.png"],["age verification","Product-Disclaimer-For-WooCommerce-2-5.png"]];
+  const productLogo = (name) => {
+    const key = name.toLowerCase();
+    const match = productLogos.find(([label]) => label === 'product bundle' && key.includes(label)) || productLogos.find(([label]) => key.includes(label));
+    return '<img src="' + (match ? '/images/products/' + match[1] : '/images/partners/woo.svg') + '" alt="' + name + '" width="48" height="48" loading="lazy">';
+  };
+
   /* ---------- Client logos (colorful, even marquee) ---------- */
   const logos = [
     'PF-Logo_60-Anniv_WEB.webp',
@@ -116,7 +124,7 @@
       .map(
         ([ic, name, sub, href]) => `
       <a class="mega__item" href="${STORE}${href}" target="_blank" rel="noopener">
-        <span class="mega__ic">${icon(ic)}</span>
+        <span class="mega__ic">${productLogo(name)}</span>
         <span><b>${name}</b><small>${sub}</small></span>
       </a>`
       )
@@ -138,23 +146,15 @@
     { ic: 'user', name: 'User Registration For WooCommerce', rate: '4.8', reviews: '39', price: '49', href: '/product/user-registration/',
       desc: 'The #1 WooCommerce registration plugin. Build custom signup forms with 25+ fields and automate your store’s onboarding.' },
   ];
-  const pcardTiles = [
-    { bg: '#e7f3fd', fg: '#168ae2' },
-    { bg: '#fdecec', fg: '#e0475c' },
-    { bg: '#e7f8ee', fg: '#16a34a' },
-    { bg: '#fef3d6', fg: '#d8a229' },
-    { bg: '#f1ecfb', fg: '#7c5cfc' },
-    { bg: '#e4f6f5', fg: '#0e9488' },
-  ];
   (function renderTop() {
     const grid = $('#topPluginGrid');
     if (!grid) return;
     grid.innerHTML = topPlugins
       .map(
-        (p, i) => `
+        (p) => `
       <article class="pcard">
         <div class="pcard__row">
-          <span class="pcard__icon" style="background:${pcardTiles[i % pcardTiles.length].bg};color:${pcardTiles[i % pcardTiles.length].fg}">${icon(p.ic)}</span>
+          <span class="pcard__icon">${productLogo(p.name)}</span>
           <a class="pcard__arrow" href="${STORE}${p.href}" target="_blank" rel="noopener" aria-label="View ${p.name}">${icon('arrowupright')}</a>
         </div>
         <h3>${p.name}</h3>
@@ -240,7 +240,7 @@
         .map(
           ([ic, title, desc, price, badge]) => `
         <a class="ccard" href="${STORE}/" target="_blank" rel="noopener">
-          <div class="ccard__top"><span class="ccard__ic">${icon(ic)}</span>${badge ? `<span class="ccard__badge">\u2605 ${badge}</span>` : ''}</div>
+          <div class="ccard__top"><span class="ccard__ic">${productLogo(title)}</span>${badge ? `<span class="ccard__badge">\u2605 ${badge}</span>` : ''}</div>
           <h3>${title}</h3>
           <p>${desc}</p>
           <div class="ccard__foot">
@@ -271,6 +271,7 @@
     { img: 'apparel', tag: 'Instant Checkout', brand: 'South Coast Linen', head: 'Faster B2B checkout, more repeat orders', slug: '' },
     { img: 'warehouse', tag: 'Sales Agent', brand: 'Print File Archival', head: 'Automated sales-agent commissions at scale', slug: '' },
   ];
+  const storyLogos = {"HSU Growing Supply":"cropped-hsu_growing_supply_logo-170x69.avif","Sweven Coffee":"sweven-coffee.jpg","Tricon Speciality Foods":"Tricon-Logo-2.png","South Coast Linen":"SCLH_Logo_360x.webp","Print File Archival":"PF-Logo_60-Anniv_WEB.webp"};
   (function renderStories() {
     const el = $('#storyTrack');
     if (!el) return;
@@ -282,7 +283,7 @@
         <div class="story__grad"></div>
         <div class="story__body">
           <span class="story__tag">${s.tag}</span>
-          <span class="story__brand">${s.brand}</span>
+          ${storyLogos[s.brand] ? `<span class="story__logo"><img src="/images/logos/${storyLogos[s.brand]}" alt="${s.brand}" loading="lazy"></span>` : ''}<span class="story__brand">${s.brand}</span>
           <p>${s.head}</p>
           <span class="story__link">Read story →</span>
         </div>
@@ -484,10 +485,6 @@
       }
     );
   }
-
-  /* ---------- Hero search (decorative, prevent reload) ---------- */
-  const sform = $('.hero__search');
-  if (sform) sform.addEventListener('submit', (e) => e.preventDefault());
 
   /* ---------- Year ---------- */
   const y = $('#year');

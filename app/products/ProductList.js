@@ -1,10 +1,11 @@
 'use client';
-import { useMemo, useState } from 'react';
-import { iconHtml } from '../lib/icons';
+import { useEffect, useMemo, useState } from 'react';
+import { productLogoSrc } from '../lib/productLogos';
 
 export default function ProductList({ plugins, categories }) {
   const [query, setQuery] = useState('');
   const [cat, setCat] = useState('All');
+  useEffect(() => { setQuery(new URLSearchParams(window.location.search).get('q') || ''); }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -52,7 +53,7 @@ export default function ProductList({ plugins, categories }) {
           {filtered.map((p) => (
             <a className="prod-card" key={p.name} href={p.href} target="_blank" rel="noopener">
               {p.badge ? <span className="prod-card__badge">{p.badge}</span> : null}
-              <span className="prod-card__ic" dangerouslySetInnerHTML={{ __html: iconHtml(p.icon) }} />
+              <span className="prod-card__ic"><img src={productLogoSrc(p.name)} alt={p.name} width="48" height="48" loading="lazy" /></span>
               <span className="prod-card__cat">{p.category}</span>
               <h3>{p.name}</h3>
               <p>{p.desc}</p>

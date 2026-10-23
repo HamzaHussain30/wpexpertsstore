@@ -10,13 +10,17 @@ export default function Home() {
             <div className="hero__copy">
               <h1>WooCommerce Plugins That Turn <span className="grad">Browsers Into Buyers</span></h1>
               <p className="hero__sub">40+ premium WooCommerce extensions that solve one problem properly: conversion, retention, B2B wholesale and design. Built by real WooCommerce experts. Try any plugin risk-free; upgrade only when it's making you money.</p>
-  
-              <form className="hero__search" role="search">
-                <input type="search" placeholder="Search plugins, e.g. wholesale, currency…" aria-label="Search plugins" />
+
+              <form className="hero__search" role="search" action="/products" method="get">
+                <input type="search" name="q" placeholder="Search plugins, e.g. wholesale, currency…" aria-label="Search plugins" />
                 <button type="submit" aria-label="Search">
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
                 </button>
               </form>
+              <div className="hero__trust" aria-label="Platform and checkout partners">
+                <img src="/images/partners/woo-pro.webp" alt="Woo Pro Partner" width="189" height="51" />
+                <span className="hero__checkout"><img src="/images/partners/freemius.svg" alt="Freemius" width="112" height="25" /><span>Secure checkout</span></span>
+              </div>
             </div>
             <div className="hero__stage">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -29,10 +33,10 @@ export default function Home() {
         <section className="section section--framed" id="top-plugins">
           <div className="container">
             <div className="section__head">
-              <span className="pill">Best Sellers</span>
               <h2>Top WooCommerce Plugins Loved By Store Owners</h2>
               <p>Hand-picked extensions that thousands of merchants rely <br/> on every day to sell more and work less.</p>
             </div>
+            <div className="marketplace-proof"><img src="/images/partners/woo.svg" alt="Woo" width="58" height="24" /><span>WooCommerce marketplace-verified plugins</span><span data-icon="shield"></span></div>
             <div className="plugin-grid" id="topPluginGrid"></div>
             <div className="section__foot">
               <a href="/products" className="btn btn--dark btn--lg"><BtnRoll>Explore More Plugins</BtnRoll> <span data-icon="arrow"></span></a>
@@ -45,8 +49,8 @@ export default function Home() {
           <div className="container statsband__inner">
             <div><b>500k<i>+</i></b><span>Trusted By Customers</span></div>
             <div><b>40<i>+</i></b><span>Premium Plugins</span></div>
-            <div><b>750k<i>+</i></b><span>Total Downloads</span></div>
-            <div><b>14<i> Yrs</i></b><span>WooCommerce Expertise</span></div>
+            <div><b>750k<i>+</i></b><span>Active Installs</span></div>
+            <div><b>14<i> Yrs</i></b><span>WooCommerce plugins &amp; WordPress Expertise</span></div>
           </div>
         </section>
 
@@ -63,7 +67,7 @@ export default function Home() {
               <div className="b2b__visual">
                 <div className="b2b__shot">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/photos/woocommerce-wholesale-dashboard.png" alt="AI-powered B2B analytics dashboard with AI assistant for WooCommerce Wholesale" width="1254" height="1254" loading="lazy" />
+                  <img src="/images/photos/woocommerce-wholesale-dashboard.png" alt="AI-powered B2B analytics dashboard with AI assistant for WooCommerce Wholesale" width="1254" height="1254" loading="eager" />
                 </div>
               </div>
 
@@ -100,7 +104,6 @@ export default function Home() {
         <section className="section section--framed" id="categories">
           <div className="container">
             <div className="section__head">
-              <span className="pill">The Full Library</span>
               <h2>Find The Perfect Plugin <br/> For Your Niche</h2>
               <p>Browse 40+ WooCommerce extensions organized by exactly <br/> what you're trying to achieve.</p>
             </div>
@@ -121,7 +124,6 @@ export default function Home() {
           <div className="container">
             <div className="section__head section__head--row">
               <div>
-                <span className="pill">Real Results</span>
                 <h2>Customer <span className="grad">Success Stories</span></h2>
                 <p>See how fast-growing stores, wholesalers and nonprofits scale with WPExperts plugins.</p>
               </div>
@@ -141,9 +143,9 @@ export default function Home() {
           <div className="container">
             <div className="whyus">
               <div className="whyus__intro">
-                <span className="whyus__eyebrow">/ Why WPExperts</span>
-                <h2>The WPExperts Difference</h2>
-                <p>For 14 years, we&apos;ve built WooCommerce plugins trusted by store owners worldwide — from solo shops to 1.5M+ active installs.</p>
+
+                <h2>Built For Every Stage Of WooCommerce Growth</h2>
+                <p>Get WooCommerce plugins engineered by a team of expert result oriented professional Woo extension developers.</p>
                 <div className="whyus__links">
                   <a href="/products" className="whyus__link">Browse Plugins <span data-icon="arrow"></span></a>
                   <a href="https://objectsws.atlassian.net/servicedesk/customer/portal/1/group/1/create/1" target="_blank" rel="noopener" className="whyus__link">Talk To Support <span data-icon="arrow"></span></a>
