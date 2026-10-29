@@ -5,7 +5,12 @@ import { productLogoSrc } from '../lib/productLogos';
 export default function ProductList({ plugins, categories }) {
   const [query, setQuery] = useState('');
   const [cat, setCat] = useState('All');
-  useEffect(() => { setQuery(new URLSearchParams(window.location.search).get('q') || ''); }, []);
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search);
+    setQuery(sp.get('q') || '');
+    const c = sp.get('cat');
+    if (c && categories.includes(c)) setCat(c);
+  }, [categories]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

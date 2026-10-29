@@ -1,4 +1,11 @@
 import BtnRoll from './components/BtnRoll';
+import { plugins } from './data/plugins';
+import { productLogoSrc } from './lib/productLogos';
+
+// Hero plugin wall: four plugins per category, dealt into 2 scrolling rows.
+const wall = [...new Set(plugins.map((p) => p.category))].flatMap((c) => plugins.filter((p) => p.category === c).slice(0, 4));
+const wallRows = [0, 1].map((i) => wall.filter((_, n) => n % 2 === i));
+const goals = [['Wholesale', 'wholesale'], ['Pricing', 'pricing'], ['Checkout', 'checkout'], ['Discounts', 'discount']];
 
 export default function Home() {
   return (
@@ -17,15 +24,30 @@ export default function Home() {
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
                 </button>
               </form>
+              <div className="hero__goals">
+                <span>Popular:</span>
+                {goals.map(([label, q]) => <a key={q} href={`/products?q=${q}`}>{label}</a>)}
+              </div>
               <div className="hero__trust" aria-label="Platform and checkout partners">
                 <img src="/images/partners/woo-pro.webp" alt="Woo Pro Partner" width="189" height="51" />
                 <span className="hero__checkout"><img src="/images/partners/freemius.svg" alt="Freemius" width="112" height="25" /><span>Secure checkout</span></span>
               </div>
             </div>
-            <div className="hero__stage">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="hero__visual" src="/images/photos/hero-foreground.png" alt="WooCommerce dashboard with sales, orders and top products" width="1031" height="571" loading="eager" fetchPriority="high" />
-            </div>
+          </div>
+          <div className="hrow" aria-hidden="true">
+            {wallRows.map((row, i) => (
+              <div className="hrow__row" key={i}>
+                <div className="hrow__track">
+                  {[...row, ...row].map((p, n) => (
+                    <div className="htile" key={n}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={productLogoSrc(p.name)} alt="" width="36" height="36" loading="eager" />
+                      <b>{p.name}</b>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -33,7 +55,7 @@ export default function Home() {
         <section className="section section--framed" id="top-plugins">
           <div className="container">
             <div className="section__head">
-              <h2>Top WooCommerce Plugins Loved By Store Owners</h2>
+              <h2>Top WooCommerce Plugins Loved <br/> By Store Owners</h2>
               <p>Hand-picked extensions that thousands of merchants rely <br/> on every day to sell more and work less.</p>
             </div>
             <div className="marketplace-proof"><img src="/images/partners/woo.svg" alt="Woo" width="58" height="24" /><span>WooCommerce marketplace-verified plugins</span><span data-icon="shield"></span></div>
@@ -50,7 +72,7 @@ export default function Home() {
             <div><b>500k<i>+</i></b><span>Trusted By Customers</span></div>
             <div><b>40<i>+</i></b><span>Premium Plugins</span></div>
             <div><b>750k<i>+</i></b><span>Active Installs</span></div>
-            <div><b>14<i> Yrs</i></b><span>WooCommerce plugins &amp; WordPress Expertise</span></div>
+            <div><b>14<i> Yrs</i></b><span>Years of Woo expertise</span></div>
           </div>
         </section>
 
@@ -67,7 +89,7 @@ export default function Home() {
               <div className="b2b__visual">
                 <div className="b2b__shot">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/photos/woocommerce-wholesale-dashboard.png" alt="AI-powered B2B analytics dashboard with AI assistant for WooCommerce Wholesale" width="1254" height="1254" loading="eager" />
+                  <img src="/images/photos/wholesale-ai-dashboard.png" alt="AI-powered B2B analytics dashboard with AI assistant for WooCommerce Wholesale" width="1254" height="1254" loading="eager" />
                 </div>
               </div>
 
@@ -208,7 +230,7 @@ export default function Home() {
         <section className="section section--alt" id="blog">
           <div className="container">
             <div className="section__head">
-              <h2>Guides, Updates &amp; WooCommerce Know-How</h2>
+              <h2>Guides, Updates &amp; WooCommerce <br/> Know-How</h2>
               <p>Actionable tips and product news to help you sell more with WooCommerce.</p>
             </div>
             <div className="blog-grid" id="blogGrid"></div>
