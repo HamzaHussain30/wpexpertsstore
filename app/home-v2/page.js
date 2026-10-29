@@ -58,12 +58,6 @@ const why = [
   ['shield', 'Battle-Tested', '1.5M+ active installs, tested against every WooCommerce release.'],
 ];
 
-const reviews = [
-  { t: 'The B2B Wholesale plugin replaced three tools for us. Wholesale pricing, quotes and analytics just work.', n: 'Marcus Reed', r: 'Founder, Nova Retail', a: 'MR', c: '#2450e6' },
-  { t: 'The bulk order product table cut our wholesale checkout time by nearly half. Buyers love it.', n: 'Liam O’Brien', r: 'Distributor', a: 'LO', c: '#16a34a' },
-  { t: 'Sales Agent automated commissions we used to track in spreadsheets. Huge time saver every month.', n: 'Sofia Marín', r: 'Sales Manager', a: 'SM', c: '#9333ea' },
-];
-
 const numbers = [
   ['4.6/5', 'Average rating from 5,000+ reviews', 'rating-star'],
   ['40+', 'Premium WooCommerce plugins', 'plugins-plug'],
@@ -160,48 +154,26 @@ export default function HomeV2() {
             ))}
           </div>
 
-          <div className="v2-more"><a href="#all-plugins" className="btn btn--dark btn--lg"><BtnRoll>Browse all 40+ plugins</BtnRoll></a></div>
         </div>
       </section>
 
-      {/* ============ WHAT MAKES US DIFFERENT ============ */}
-      <section className="v2-sec v2-sec--soft">
+      {/* ============ ALL PLUGINS (right after featured): same markup as the main homepage, rendered by /js/main.js ============ */}
+      <section className="section section--framed" id="all-plugins">
         <div className="container">
-          <div className="v2-head">
-            <h2>What Makes Us Different</h2>
-            <p>Not just another plugin developer company. Here&apos;s what we do differently.</p>
+          <div className="section__head">
+            <h2>Find The Perfect Plugin <br /> For Your Niche</h2>
+            <p>Browse 40+ WooCommerce extensions organized by exactly <br /> what you&apos;re trying to achieve.</p>
           </div>
-          <div className="v2-why">
-            {why.map(([ic, h, p]) => (
-              <div className="v2-why__card" key={h}>
-                <span className="v2-why__ic"><Ic name={ic} size={24} /></span>
-                <h3>{h}</h3>
-                <p>{p}</p>
-              </div>
-            ))}
+          <div className="ctabs" id="catTabs" role="tablist"></div>
+          <div className="cat-bar">
+            <div>
+              <h3 id="catTitle">B2B &amp; Wholesale</h3>
+              <p id="catGoal"></p>
+            </div>
+            <span className="cat-count">40+ plugins available</span>
           </div>
-        </div>
-      </section>
-
-      {/* ============ REVIEWS ============ */}
-      <section className="v2-sec">
-        <div className="container">
-          <div className="v2-head">
-            <h2>Recognized By Merchants &amp; WooCommerce Experts</h2>
-            <p>A matter of pride to see store owners and agencies trust us.</p>
-          </div>
-          <div className="v2-rev">
-            {reviews.map((r) => (
-              <figure className="v2-rev__card" key={r.n}>
-                <div className="v2-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                <blockquote>{r.t}</blockquote>
-                <figcaption>
-                  <span className="v2-av" style={{ background: r.c }}>{r.a}</span>
-                  <span><b>{r.n}</b>{r.r}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <div className="cat-grid" id="catGrid"></div>
+          <div className="section__foot"><a href="/products" className="btn btn--dark btn--lg"><BtnRoll>View all plugins</BtnRoll></a></div>
         </div>
       </section>
 
@@ -224,23 +196,123 @@ export default function HomeV2() {
         </div>
       </section>
 
-      {/* ============ ALL PLUGINS (bottom): same markup as the main homepage, rendered by /js/main.js ============ */}
-      <section className="section section--framed" id="all-plugins">
+      {/* ============ BRANDS ============ */}
+      <section className="brands" aria-label="Customers">
+        <div className="container">
+          <p className="brands__label">Trusted By <strong>1.5&nbsp;Million+</strong> Brands, Distributors &amp; Stores Worldwide</p>
+        </div>
+        <div className="brands__marquee">
+          <div className="brands__row" id="brandRowA"></div>
+          <div className="brands__row brands__row--rev" id="brandRowB"></div>
+        </div>
+      </section>
+
+      {/* ============ WHAT MAKES US DIFFERENT ============ */}
+      <section className="v2-sec v2-sec--soft">
+        <div className="container">
+          <div className="v2-head">
+            <h2>What Makes Us Different</h2>
+            <p>Not just another plugin developer company. Here&apos;s what we do differently.</p>
+          </div>
+          <div className="v2-why">
+            {why.map(([ic, h, p]) => (
+              <div className="v2-why__card" key={h}>
+                <span className="v2-why__ic"><Ic name={ic} size={24} /></span>
+                <h3>{h}</h3>
+                <p>{p}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ REVIEWS (same as main homepage, rendered by /js/main.js) ============ */}
+      <section className="section" id="reviews">
         <div className="container">
           <div className="section__head">
-            <h2>Find The Perfect Plugin <br /> For Your Niche</h2>
-            <p>Browse 40+ WooCommerce extensions organized by exactly <br /> what you&apos;re trying to achieve.</p>
+            <span className="pill">★ 4.6 Average · 5,000+ Reviews</span>
+            <h2>Loved By Merchants Everywhere</h2>
+            <p>Trusted by store owners, wholesalers and agencies who ship faster with WPExperts.</p>
           </div>
-          <div className="ctabs" id="catTabs" role="tablist"></div>
-          <div className="cat-bar">
+        </div>
+        <div className="reviews-marquee">
+          <div className="reviews-row" id="reviewRowA"></div>
+          <div className="reviews-row reviews-row--rev" id="reviewRowB"></div>
+        </div>
+      </section>
+
+      {/* ============ CUSTOMER SUCCESS STORIES ============ */}
+      <section className="section section--alt" id="stories">
+        <div className="container">
+          <div className="section__head section__head--row">
             <div>
-              <h3 id="catTitle">B2B &amp; Wholesale</h3>
-              <p id="catGoal"></p>
+              <h2>Customer <span className="grad">Success Stories</span></h2>
+              <p>See how fast-growing stores, wholesalers and nonprofits scale with WPExperts plugins.</p>
             </div>
-            <span className="cat-count">40+ plugins available</span>
+            <div className="story__nav">
+              <button id="storyPrev" aria-label="Previous">‹</button>
+              <button id="storyNext" aria-label="Next">›</button>
+            </div>
           </div>
-          <div className="cat-grid" id="catGrid"></div>
-          <div className="section__foot"><a href="/products" className="btn btn--dark btn--lg"><BtnRoll>View all plugins</BtnRoll></a></div>
+        </div>
+        <div className="story-rail">
+          <div className="story-track" id="storyTrack"></div>
+        </div>
+      </section>
+
+      {/* ============ HELP ============ */}
+      <section className="section" id="help">
+        <div className="container">
+          <div className="section__head">
+            <span className="pill">We&apos;re Here To Help</span>
+            <h2>Expert Support At Every Step</h2>
+            <p>Detailed documentation and expert support to help you get <br /> the most from every plugin.</p>
+          </div>
+          <div className="help-grid">
+            <div className="help">
+              <span className="help__ic help__ic--a" data-icon="book"></span>
+              <h3>Knowledge Base</h3>
+              <p>700+ searchable articles with instant answers to almost every question.</p>
+              <a href="https://store.wpexperts.io/docs/" target="_blank" rel="noopener" className="link">Browse Docs →</a>
+            </div>
+            <div className="help">
+              <span className="help__ic help__ic--b" data-icon="play"></span>
+              <h3>Video Tutorials</h3>
+              <p>800+ step-by-step written and video tutorials for a wide range of use cases.</p>
+              <a href="https://www.youtube.com/@WPExpertsio/videos" target="_blank" rel="noopener" className="link">Watch On YouTube →</a>
+            </div>
+            <div className="help">
+              <span className="help__ic help__ic--c" data-icon="headset"></span>
+              <h3>Plugin Support</h3>
+              <p>All products include full support: expert, personalized advice when you need it.</p>
+              <a href="https://objectsws.atlassian.net/servicedesk/customer/portal/1/group/1/create/1" target="_blank" rel="noopener" className="link">Open A Ticket →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ BLOG ============ */}
+      <section className="section section--alt" id="blog">
+        <div className="container">
+          <div className="section__head">
+            <h2>Guides, Updates &amp; WooCommerce <br /> Know-How</h2>
+            <p>Actionable tips and product news to help you sell more with WooCommerce.</p>
+          </div>
+          <div className="blog-grid" id="blogGrid"></div>
+          <div className="section__foot">
+            <a href="/blog" className="btn btn--dark"><BtnRoll>View All Articles</BtnRoll></a>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ FAQ ============ */}
+      <section className="section" id="faq">
+        <div className="container container--narrow">
+          <div className="section__head">
+            <h2>Frequently Asked Questions</h2>
+            <p>Everything you need to know about our WooCommerce plugins<br /> and the All Access bundle.</p>
+          </div>
+          <div className="faq" id="faqList"></div>
         </div>
       </section>
 
