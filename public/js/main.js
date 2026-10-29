@@ -310,7 +310,7 @@
         <div class="review__stars">${stars}</div>
         <p>“${r.t}”</p>
         <div class="review__who">
-          <span class="review__av">${r.a}</span>
+          <span class="review__av" style="--c:${r.c}">${r.a}</span>
           <div><b>${r.n}</b><span>${r.r}</span></div>
         </div>
       </article>`;

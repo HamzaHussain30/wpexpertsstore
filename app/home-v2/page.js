@@ -25,17 +25,28 @@ const Ic = ({ name, size = 22 }) => (
 
 const byName = (n) => plugins.find((p) => p.name === n);
 
-// Hero marquee: four plugins per category, dealt into 2 rows.
-const wall = [...new Set(plugins.map((p) => p.category))].flatMap((c) => plugins.filter((p) => p.category === c).slice(0, 4));
-const wallRows = [0, 1].map((i) => wall.filter((_, n) => n % 2 === i));
+// Hero marquee: running stats (figures already used on the site), dealt into 2 rows.
+const heroStats = [
+  ['4.6/5', 'Average rating'],
+  ['500K+', 'Happy customers'],
+  ['40+', 'Premium plugins'],
+  ['14 Yrs', 'Of Woo expertise'],
+  ['750K+', 'Active installs'],
+  ['5,000+', 'Customer reviews'],
+  ['6 hrs', 'Avg. support response'],
+  ['1.5M+', 'Brands & stores served'],
+];
+const wallRows = [0, 1].map((i) => heroStats.filter((_, n) => n % 2 === i));
 const goals = [['Wholesale', 'wholesale'], ['Pricing', 'pricing'], ['Checkout', 'checkout'], ['Discounts', 'discount']];
 
 // Flagship = full-width dark card. Others = staggered two-column cards.
 // Drop each screenshot at `shot` (1200x700 PNG); until it exists a placeholder shows the expected filename.
 const flagship = { name: 'B2B Wholesale for WooCommerce', title: 'B2B Wholesale for WooCommerce', badge: 'AI-Powered', pitch: 'The complete AI-powered B2B engine: wholesale pricing, buyer roles, quotes, bulk ordering and a live analytics dashboard in one plugin.', shot: '/images/photos/wholesale-ai-dashboard.png', points: ['AI price suggestions & auto-quotes', 'Role-based & tiered wholesale pricing', 'Company accounts, credit & invoicing'] };
 const featured = [
-  { name: 'Currency Switcher', badge: 'Best seller', pitch: 'Sell worldwide in local currencies with auto-detection, live exchange rates and one-click switching.', shot: '/images/shots/currency-switcher.png' },
-  { name: 'Donation for WooCommerce', pitch: 'Accept one-time and recurring donations with goals, progress bars and flexible amounts.', shot: '/images/shots/donation.png' },
+  { name: 'Currency Switcher', tone: 'cream', badge: 'Best seller', pitch: 'Sell worldwide in local currencies with auto-detection, live exchange rates and one-click switching.', shot: '/images/shots/currency-switcher.png' },
+  { name: 'Donation for WooCommerce', tone: 'mint', pitch: 'Accept one-time and recurring donations with goals, progress bars and flexible amounts.', shot: '/images/shots/donation.png' },
+  { name: 'Bulk Order Product Table', tone: 'violet', pitch: 'Give wholesale buyers a fast, searchable ordering table with filters, sorting and one-click add to cart.', shot: '/images/shots/bulk-order.png' },
+  { name: 'Instant Checkout', tone: 'teal', pitch: 'Replace the multi-step cart flow with a one-page checkout that cuts abandonment and speeds up every purchase.', shot: '/images/shots/instant-checkout.png' },
 ];
 const cols = [featured.filter((_, i) => i % 2 === 0), featured.filter((_, i) => i % 2 === 1)];
 
@@ -52,10 +63,16 @@ function Shot({ src, name }) {
 }
 
 const why = [
-  ['ai', 'AI-Powered', 'Smart pricing suggestions, auto-generated quotes and predictive B2B workflows.'],
-  ['box', 'All-In-One Value', 'One membership unlocks 40+ plugins and every future release, saving up to 80%.'],
-  ['headset', 'Expert Support', '200+ WooCommerce specialists on 24/7 coverage, 6-hour average response.'],
-  ['shield', 'Battle-Tested', '1.5M+ active installs, tested against every WooCommerce release.'],
+  ['ai', '/images/why/ai-powered.png', 'AI-Powered', 'Smart pricing suggestions, auto-generated quotes and predictive B2B workflows.'],
+  ['box', '/images/why/all-in-one.png', 'All-In-One Value', 'One membership unlocks 40+ plugins and every future release, saving up to 80%.'],
+  ['headset', '/images/why/expert-support.png', 'Expert Support', '200+ WooCommerce specialists on 24/7 coverage, 6-hour average response.'],
+  ['shield', '/images/why/battle-tested.png', 'Battle-Tested', '1.5M+ active installs, tested against every WooCommerce release.'],
+];
+
+const helpCards = [
+  { tone: 'blue', icon: '/images/help/knowledge-base.png', fallback: ['book', 'a'], title: 'Knowledge Base', desc: '700+ searchable articles with instant answers to almost every question.', cta: 'Browse Docs', href: 'https://store.wpexperts.io/docs/' },
+  { tone: 'amber', icon: '/images/help/video-tutorials.png', fallback: ['play', 'b'], title: 'Video Tutorials', desc: '800+ step-by-step written and video tutorials for a wide range of use cases.', cta: 'Watch On YouTube', href: 'https://www.youtube.com/@WPExpertsio/videos' },
+  { tone: 'violet', icon: '/images/help/plugin-support.png', fallback: ['headset', 'c'], title: 'Plugin Support', desc: 'All products include full support: expert, personalized advice when you need it.', cta: 'Open A Ticket', href: 'https://objectsws.atlassian.net/servicedesk/customer/portal/1/group/1/create/1' },
 ];
 
 const numbers = [
@@ -96,11 +113,9 @@ export default function HomeV2() {
           {wallRows.map((row, i) => (
             <div className="hrow__row" key={i}>
               <div className="hrow__track">
-                {[...row, ...row].map((p, n) => (
-                  <div className="htile" key={n}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={productLogoSrc(p.name)} alt="" width="36" height="36" loading="eager" />
-                    <b>{p.name}</b>
+                {[...row, ...row, ...row, ...row, ...row, ...row].map((st, n) => (
+                  <div className="htile hstat" key={n}>
+                    <b>{st[0]}</b><span>{st[1]}</span>
                   </div>
                 ))}
               </div>
@@ -137,7 +152,7 @@ export default function HomeV2() {
                 {col.map((f) => {
                   const p = byName(f.name);
                   return (
-                    <article className="v2-card" key={f.name}>
+                    <article className={`v2-card v2-card--${f.tone}`} key={f.name}>
                       <header>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={productLogoSrc(f.name)} alt="" width="44" height="44" />
@@ -154,6 +169,25 @@ export default function HomeV2() {
             ))}
           </div>
 
+        </div>
+      </section>
+
+      {/* ============ NUMBERS ============ */}
+      <section className="v2-sec v2-sec--soft">
+        <div className="container">
+          <div className="v2-head">
+            <h2>Trusted By WordPress &amp; WooCommerce Users</h2>
+            <p>Backed by store owners, wholesalers and agencies around the world.</p>
+          </div>
+          <div className="v2-num">
+            {numbers.map(([n, l, ic, hi]) => (
+              <div className={`v2-num__tile${hi ? ' v2-num__tile--hi' : ''}`} key={l}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="v2-num__img" src={`/images/stats/${ic}.png`} alt="" width="512" height="512" loading="lazy" />
+                <b>{n}</b><span>{l}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -177,27 +211,8 @@ export default function HomeV2() {
         </div>
       </section>
 
-      {/* ============ NUMBERS ============ */}
-      <section className="v2-sec v2-sec--soft">
-        <div className="container">
-          <div className="v2-head">
-            <h2>Trusted By WordPress &amp; WooCommerce Users</h2>
-            <p>Backed by store owners, wholesalers and agencies around the world.</p>
-          </div>
-          <div className="v2-num">
-            {numbers.map(([n, l, ic, hi]) => (
-              <div className={`v2-num__tile${hi ? ' v2-num__tile--hi' : ''}`} key={l}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="v2-num__img" src={`/images/stats/${ic}.png`} alt="" width="512" height="512" loading="lazy" />
-                <b>{n}</b><span>{l}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ============ BRANDS ============ */}
-      <section className="brands" aria-label="Customers">
+      <section className="brands v2-brands" aria-label="Customers">
         <div className="container">
           <p className="brands__label">Trusted By <strong>1.5&nbsp;Million+</strong> Brands, Distributors &amp; Stores Worldwide</p>
         </div>
@@ -215,9 +230,11 @@ export default function HomeV2() {
             <p>Not just another plugin developer company. Here&apos;s what we do differently.</p>
           </div>
           <div className="v2-why">
-            {why.map(([ic, h, p]) => (
+            {why.map(([ic, img, h, p]) => (
               <div className="v2-why__card" key={h}>
-                <span className="v2-why__ic"><Ic name={ic} size={24} /></span>
+                {exists(img)
+                  ? /* eslint-disable-next-line @next/next/no-img-element */ <img className="v2-why__img" src={img} alt="" width="512" height="512" loading="lazy" />
+                  : <span className="v2-why__ic"><Ic name={ic} size={24} /></span>}
                 <h3>{h}</h3>
                 <p>{p}</p>
               </div>
@@ -227,7 +244,7 @@ export default function HomeV2() {
       </section>
 
       {/* ============ REVIEWS (same as main homepage, rendered by /js/main.js) ============ */}
-      <section className="section" id="reviews">
+      <section className="section v2-reviews" id="reviews">
         <div className="container">
           <div className="section__head">
             <span className="pill">★ 4.6 Average · 5,000+ Reviews</span>
@@ -268,25 +285,17 @@ export default function HomeV2() {
             <h2>Expert Support At Every Step</h2>
             <p>Detailed documentation and expert support to help you get <br /> the most from every plugin.</p>
           </div>
-          <div className="help-grid">
-            <div className="help">
-              <span className="help__ic help__ic--a" data-icon="book"></span>
-              <h3>Knowledge Base</h3>
-              <p>700+ searchable articles with instant answers to almost every question.</p>
-              <a href="https://store.wpexperts.io/docs/" target="_blank" rel="noopener" className="link">Browse Docs →</a>
-            </div>
-            <div className="help">
-              <span className="help__ic help__ic--b" data-icon="play"></span>
-              <h3>Video Tutorials</h3>
-              <p>800+ step-by-step written and video tutorials for a wide range of use cases.</p>
-              <a href="https://www.youtube.com/@WPExpertsio/videos" target="_blank" rel="noopener" className="link">Watch On YouTube →</a>
-            </div>
-            <div className="help">
-              <span className="help__ic help__ic--c" data-icon="headset"></span>
-              <h3>Plugin Support</h3>
-              <p>All products include full support: expert, personalized advice when you need it.</p>
-              <a href="https://objectsws.atlassian.net/servicedesk/customer/portal/1/group/1/create/1" target="_blank" rel="noopener" className="link">Open A Ticket →</a>
-            </div>
+          <div className="v2-help">
+            {helpCards.map((h) => (
+              <a className={`v2-help__card v2-help__card--${h.tone}`} key={h.title} href={h.href} target="_blank" rel="noopener">
+                {exists(h.icon)
+                  ? /* eslint-disable-next-line @next/next/no-img-element */ <img className="v2-help__img" src={h.icon} alt="" width="512" height="512" loading="lazy" />
+                  : <span className={`help__ic help__ic--${h.fallback[1]} v2-help__fb`} data-icon={h.fallback[0]}></span>}
+                <h3>{h.title}</h3>
+                <p>{h.desc}</p>
+                <span className="v2-help__cta">{h.cta} <Ic name="arrow" size={16} /></span>
+              </a>
+            ))}
           </div>
         </div>
       </section>
