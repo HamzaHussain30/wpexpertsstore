@@ -1,4 +1,4 @@
-/* /home-v2 draft: all classes namespaced v2-, reuses the global hero + theme tokens */
+/* Homepage styles: all classes namespaced v2-, reuses the global hero + theme tokens */
 .v2-sec { padding: var(--section-y, 96px) 0; }
 .v2-sec--tight { padding-top: 0; }
 .v2-sec--soft { background: #f3f7fd; }
