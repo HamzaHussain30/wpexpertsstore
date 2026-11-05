@@ -1,77 +1,78 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
-import { productLogoSrc } from '../lib/productLogos';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import PluginCard from '../components/PluginCard';
 
-export default function ProductList({ plugins, categories }) {
+const goals = [['Wholesale', 'wholesale'], ['Pricing', 'pricing'], ['Checkout', 'checkout'], ['Discounts', 'discount']];
+const price = (p) => parseInt(p.price.replace(/\D/g, ''), 10) || 0;
+const sorts = {
+  featured: ['Featured', null],
+  low: ['Price: low to high', (a, b) => price(a) - price(b)],
+  high: ['Price: high to low', (a, b) => price(b) - price(a)],
+  name: ['Name: A–Z', (a, b) => a.name.localeCompare(b.name)],
+};
+
+export default function ProductList({ plugins }) {
   const [query, setQuery] = useState('');
-  const [cat, setCat] = useState('All');
-  useEffect(() => {
-    const sp = new URLSearchParams(window.location.search);
-    setQuery(sp.get('q') || '');
-    const c = sp.get('cat');
-    if (c && categories.includes(c)) setCat(c);
-  }, [categories]);
+  const [sort, setSort] = useState('featured');
+  const input = useRef(null);
+  useEffect(() => { setQuery(new URLSearchParams(window.location.search).get('q') || ''); }, []);
 
+  const q = query.trim().toLowerCase();
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return plugins.filter((p) => {
-      const okCat = cat === 'All' || p.category === cat;
-      const okQ = !q || `${p.name} ${p.desc} ${p.category}`.toLowerCase().includes(q);
-      return okCat && okQ;
-    });
-  }, [plugins, query, cat]);
+    const list = plugins.filter((p) => !q || `${p.name} ${p.desc} ${p.category}`.toLowerCase().includes(q));
+    return sorts[sort][1] ? [...list].sort(sorts[sort][1]) : list;
+  }, [plugins, q, sort]);
 
   return (
     <>
-      <div className="blog-tools">
-        <div className="blog-search">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-            <path fill="currentColor" d="M10 2a8 8 0 105.29 14.03l4.84 4.84 1.41-1.41-4.84-4.84A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
-          </svg>
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search 40+ WooCommerce plugins…"
-            aria-label="Search plugins"
-          />
+      <section className="phero">
+        <div className="container">
+          <h1>All WooCommerce Plugins</h1>
+          <p>40+ premium extensions built by real WooCommerce experts. Every plugin comes with a 14-day money-back guarantee.</p>
         </div>
-        <div className="chips" role="tablist">
-          {categories.map((c) => (
-            <button
-              key={c}
-              className={`chip${cat === c ? ' active' : ''}`}
-              onClick={() => setCat(c)}
-              role="tab"
-              aria-selected={cat === c}
-            >
-              <span>{c}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+      </section>
 
-      <p className="prod-count">{filtered.length} plugin{filtered.length === 1 ? '' : 's'}</p>
+      <section className="section section--framed" id="all-plugins">
+        <div className="container">
+          <div className="ptool" role="search">
+            <label className="ptool__search">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
+              <input
+                ref={input}
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Escape') setQuery(''); }}
+                placeholder={`Search ${plugins.length} plugins, e.g. wholesale, currency…`}
+                aria-label="Search plugins"
+                autoComplete="off"
+              />
+              {query ? <button type="button" onClick={() => { setQuery(''); input.current?.focus(); }} aria-label="Clear search">×</button> : null}
+            </label>
+            <p className="ptool__count" aria-live="polite">{q ? `${filtered.length} of ${plugins.length}` : plugins.length} plugins</p>
+            <label className="ptool__sort">
+              <span>Sort by</span>
+              <select value={sort} onChange={(e) => setSort(e.target.value)}>
+                {Object.entries(sorts).map(([k, [label]]) => <option key={k} value={k}>{label}</option>)}
+              </select>
+            </label>
+          </div>
 
-      {filtered.length ? (
-        <div className="prod-grid">
-          {filtered.map((p) => (
-            <a className="prod-card" key={p.name} href={p.href} target="_blank" rel="noopener">
-              {p.badge ? <span className="prod-card__badge">{p.badge}</span> : null}
-              <span className="prod-card__ic"><img src={productLogoSrc(p.name)} alt={p.name} width="48" height="48" loading="lazy" /></span>
-              <span className="prod-card__cat">{p.category}</span>
-              <h3>{p.name}</h3>
-              <p>{p.desc}</p>
-              <div className="prod-card__foot">
-                <span className="prod-card__price">{p.price}</span>
-                <span className="prod-card__link">View Plugin →</span>
+          {filtered.length ? (
+            <div className="pgrid">
+              {filtered.map((p) => <PluginCard key={p.slug} p={p} />)}
+            </div>
+          ) : (
+            <div className="prod-empty">
+              <p>No plugins match &ldquo;{query.trim()}&rdquo;. Try a broader word, or start from a popular one:</p>
+              <div className="prod-empty__chips">
+                {goals.map(([label, term]) => <button key={term} type="button" className="chip" onClick={() => setQuery(term)}>{label}</button>)}
               </div>
-            </a>
-          ))}
+              <button type="button" className="btn btn--dark" onClick={() => setQuery('')}>Show all plugins</button>
+            </div>
+          )}
         </div>
-      ) : (
-        <p className="blog-empty">No plugins match your search. Try a different keyword or category.</p>
-      )}
+      </section>
     </>
   );
 }

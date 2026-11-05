@@ -34,8 +34,8 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-2xl: 20px;
-  --btn-radius: 999px;
-  --btn-radius-sm: 999px;
+  --btn-radius: 6px;
+  --btn-radius-sm: 6px;
 
   /* Shadow scale — restrained, no color glows */
   --shadow-xs: 0 1px 2px rgba(10,16,32,.05);
@@ -74,26 +74,28 @@ button, input, textarea, select { font-family: inherit; }
 .ic--sm { width: 15px; height: 15px; }
 :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
 
-/* ---------- Buttons — pill CTAs, feedback lives in the text roll, not color ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: .9375rem;
-  padding: 10px 20px; border-radius: var(--btn-radius); border: 1px solid transparent; cursor: pointer; font-family: inherit; white-space: nowrap;
-  transition: transform .18s ease; }
+/* ---------- Buttons: square-ish 6px corners, 48px tall, bold (same as the docs page); the label roll stays ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; font-weight: 700; font-size: 1rem;
+  border-radius: var(--btn-radius); border: 1.5px solid transparent; cursor: pointer; font-family: inherit; white-space: nowrap;
+  transition: transform .18s ease, background-color .15s, border-color .15s, color .15s; }
 .btn svg, .btn .ic { width: 16px; height: 16px; flex-shrink: 0; vertical-align: middle; }
 .btn [data-icon] { display: inline-flex; }
-.btn--lg { padding: 13px 26px; font-size: 1rem; }
+.btn--lg { min-height: 52px; padding: 0 28px; }
 .btn--lg svg, .btn--lg .ic { width: 18px; height: 18px; }
-.btn--sm { padding: 7px 14px; font-size: .8125rem; gap: 5px; border-radius: var(--btn-radius-sm); }
+.btn--sm { min-height: 40px; padding: 0 16px; font-size: .875rem; gap: 6px; border-radius: var(--btn-radius-sm); }
 .btn--sm svg, .btn--sm .ic { width: 14px; height: 14px; }
 .btn--block { width: 100%; }
-.btn:active { transform: scale(.97); }
-.btn--primary, .btn--dark, .btn--accent, .btn--brand { box-shadow: 0 1px 2px rgba(10,16,32,.08); }
-.btn--primary { background: var(--cta); color: var(--cta-ink); }
-.btn--accent { background: var(--amber); color: var(--cta-ink); }
+.btn:active { transform: scale(.98); }
+.btn--primary, .btn--accent { background: #f5b82e; color: #000; }
+.btn--primary:hover, .btn--accent:hover { background: #ffc94d; }
 .btn--brand { background: var(--brand); color: #fff; }
 .btn--ghost { background: var(--bg-muted); color: var(--text-primary); }
 .btn--outline-light { background: transparent; color: #fff; border-color: rgba(255,255,255,.3); }
-.btn--dark { background: var(--navy); color: #fff; }
-.btn--outline { background: transparent; color: var(--text-primary); border-color: var(--border-strong); }
+.btn--dark { background: #081a64; color: #fff; }
+.btn--dark:hover { background: #0a6bc0; }
+.btn--outline { background: transparent; color: #0b1020; border-color: #c5cdde; }
+.btn--outline:hover { border-color: #0b1020; }
+.site-header__cta .btn { min-height: 44px; padding: 0 20px; }
 
 /* Text roll — current label slides up and out, its twin slides up from below */
 .btn__roll { display: inline-block; overflow: hidden; height: 1em; line-height: 1em; vertical-align: middle; }
@@ -155,27 +157,27 @@ button, input, textarea, select { font-family: inherit; }
 .nav > a:hover, .nav-link:hover { color: var(--text-primary); }
 .site-header__cta { flex: 1 1 0; display: flex; gap: 12px; justify-content: flex-end; }
 
-/* Mega menu */
+/* Mega menu: one small white panel under the Plugins button */
 .nav-item--mega { position: relative; }
+.nav-item--mega > .nav-link { height: 72px; } /* button fills the header height, so the pointer never leaves the hover area on its way down */
 .caret { display: inline-flex; transition: transform .2s; }
 .caret svg { width: 14px; height: 14px; }
-.nav-item--mega.open .caret { transform: rotate(180deg); }
-.mega { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%) translateY(8px); width: 600px; max-width: 92vw;
-  background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 18px; opacity: 0; visibility: hidden; transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s; z-index: 60; }
-.nav-item--mega:hover .mega, .nav-item--mega.open .mega { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); transition: opacity .18s ease, transform .18s ease, visibility 0s; }
-.mega::before { content: ""; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
-.mega__head { display: flex; justify-content: space-between; align-items: center; padding: 0 4px 12px; margin-bottom: 12px; }
-.mega__head span { font-size: .6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-tertiary); }
-.mega__head a { font-size: .8rem; font-weight: 600; color: var(--brand); }
-.mega__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-.mega__item { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: var(--radius-md); transition: background .15s; }
-.mega__item:hover { background: var(--bg-soft); }
-.mega__ic { width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; flex-shrink: 0; }
-.mega__item:hover .mega__ic { background: var(--brand); color: #fff; }
-.mega__item b { display: block; font-size: .9rem; font-weight: 600; color: var(--text-primary); }
-.mega__item small { font-size: .78rem; color: var(--text-tertiary); }
-.mega__all { display: block; text-align: center; margin-top: 12px; padding: 12px; border-radius: var(--radius-md); background: var(--navy); color: #fff; font-weight: 600; font-size: .875rem; }
-.mega__all:hover { background: var(--brand); }
+.nav-item--mega.open .caret, .nav-item--mega:hover .caret { transform: rotate(180deg); }
+.nav-item--mega:hover > .nav-link, .nav-item--mega.open > .nav-link { color: var(--text-primary); }
+
+.mega { position: absolute; top: calc(100% - 8px); left: -20px; z-index: 60; width: 600px; padding: 12px;
+  background: #fff; border: 1px solid var(--border); border-radius: 20px; box-shadow: 0 24px 48px -16px rgba(16,33,84,.22);
+  opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .16s ease, transform .16s ease, visibility 0s linear .16s; }
+.nav-item--mega:hover .mega, .nav-item--mega.open .mega, .nav-item--mega:focus-within .mega { opacity: 1; visibility: visible; transform: none; transition: opacity .16s ease, transform .16s ease, visibility 0s; }
+.mega__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.mega__item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px; transition: background .15s; }
+.mega__item:hover { background: #f3f7fd; }
+.mega__item img { width: 40px; height: 40px; flex: none; object-fit: contain; }
+.mega__item b { display: block; font-size: .9375rem; font-weight: 600; color: #102154; line-height: 1.3; }
+.mega__item small { display: block; font-size: .8125rem; color: var(--text-tertiary); line-height: 1.4; }
+.mega__all { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; padding: 12px; border-top: 1px solid var(--border); border-radius: 0 0 12px 12px; font-size: .9375rem; font-weight: 600; color: var(--brand); transition: gap .18s, color .18s; }
+.mega__all:hover { gap: 10px; color: var(--brand-hover); }
+@media (prefers-reduced-motion: reduce) { .mega { transition: none; } }
 
 .nav-toggle { display: none; margin-left: auto; background: none; border: 0; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
 .nav-toggle span { width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: .25s; }
@@ -606,7 +608,6 @@ button, input, textarea, select { font-family: inherit; }
   .whyus__intro { padding-right: 0; }
   .blog-grid, .help-grid, .cat-grid { grid-template-columns: repeat(2,1fr); }
   .statsband__inner { grid-template-columns: repeat(2,1fr); gap: 32px 24px; padding: 40px 24px; }
-  .mega { width: 560px; }
  
   .help:first-child, .help:nth-child(2) { border-top: 0; }
 }

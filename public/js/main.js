@@ -108,29 +108,6 @@
     rowB.innerHTML = setB + setB;
   })();
 
-  /* ---------- Mega menu: top plugins ---------- */
-  const megaPlugins = [
-    ['b2b', 'B2B Wholesale (AI)', 'Wholesale pricing, roles & quotes', '/product/wholesale-for-woocommerce/'],
-    ['heart', 'Donation', 'Charity & recurring fundraising', '/product/donation/'],
-    ['globe', 'Currency Switcher', 'Multi-currency & higher AOV', '/product/currency-switcher/'],
-    ['chart', 'Sales Agent', 'Agents & automated commissions', '/product/sales-agent/'],
-    ['table', 'Bulk Order Product Table', 'Fast B2B ordering table', '/product/bulk-order-b2b-product-table/'],
-    ['user', 'User Registration', 'Custom signup form builder', '/product/user-registration/'],
-  ];
-  (function renderMega() {
-    const el = $('#megaGrid');
-    if (!el) return;
-    el.innerHTML = megaPlugins
-      .map(
-        ([ic, name, sub, href]) => `
-      <a class="mega__item" href="${STORE}${href}" target="_blank" rel="noopener">
-        <span class="mega__ic">${productLogo(name)}</span>
-        <span><b>${name}</b><small>${sub}</small></span>
-      </a>`
-      )
-      .join('');
-  })();
-
   /* ---------- Top-selling WooCommerce plugins (6) ---------- */
   const topPlugins = [
     { ic: 'b2b', badge: 'AI-Powered', name: 'B2B Wholesale For WooCommerce', rate: '4.4', reviews: '137', price: '129', href: '/product/wholesale-for-woocommerce/',
@@ -394,6 +371,7 @@
       const open = megaWrap.classList.toggle('open');
       btn.setAttribute('aria-expanded', String(open));
     });
+    megaWrap.addEventListener('mouseleave', close);
     document.addEventListener('click', (e) => { if (!megaWrap.contains(e.target)) close(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
   }
